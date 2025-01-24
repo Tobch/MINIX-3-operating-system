@@ -1,0 +1,30 @@
+    compile  vm/fork.o
+fork.c:61:10: error: assigning to 'pt_t' from incompatible type 'opt_t'
+  origpt = vmc->vm_pt;
+         ^ ~~~~~~~~~~
+fork.c:66:14: error: assigning to 'opt_t' from incompatible type 'pt_t'
+  vmc->vm_pt = origpt;
+             ^ ~~~~~~
+fork.c:72:13: warning: incompatible pointer types passing 'opt_t *' to parameter of type 'pt_t *' [-Wincompatible-pointer-types]
+  if(pt_new(&vmc->vm_pt) != OK) {
+            ^~~~~~~~~~~
+/usr/src/servers/vm/proto.h:83:18: note: passing argument to parameter 'pt' here
+int pt_new(pt_t *pt);
+                 ^
+fork.c:80:10: warning: incompatible pointer types passing 'opt_t *' to parameter of type 'pt_t *' [-Wincompatible-pointer-types]
+        pt_free(&vmc->vm_pt);
+                ^~~~~~~~~~~
+/usr/src/servers/vm/proto.h:84:20: note: passing argument to parameter 'pt' here
+void pt_free(pt_t *pt);
+                   ^
+fork.c:96:17: warning: incompatible pointer types passing 'opt_t *' to parameter of type 'pt_t *' [-Wincompatible-pointer-types]
+  if((r=pt_bind(&vmc->vm_pt, vmc)) != OK)
+                ^~~~~~~~~~~
+/usr/src/servers/vm/proto.h:94:19: note: passing argument to parameter 'pt' here
+int pt_bind(pt_t *pt, struct vmproc *who);
+                  ^
+3 warnings and 2 errors generated.
+*** Error code 1
+
+Stop.
+make: stopped in /usr/src/servers/vm
